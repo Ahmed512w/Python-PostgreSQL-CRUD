@@ -28,13 +28,10 @@ table.insert_many(
 )
 
 
-table.select(
-    columns = '*'
-)
+table.select_all()
 
 
-table.select(
-    columns = '*',
+table.select_all(
     primaryKey_value = 'luxor'
 )
 
@@ -69,9 +66,7 @@ table.delete(
 )
 
 
-table.select(
-    columns = 'All'
-)
+table.select_all()
 
 
 table.delete_all()

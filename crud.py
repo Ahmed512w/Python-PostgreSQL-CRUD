@@ -82,30 +82,42 @@ class Crud:
 
     def select(self, columns, primaryKey_value = None):
         self._connect()
-        if type(columns) == str and ( columns == '*' or columns.lower() == 'all' ):
-            if primaryKey_value == None:
-                select_query = sql.SQL("SELECT * FROM {}").format(sql.Identifier(self.table))  
-            else:
-                select_query = sql.SQL("SELECT * FROM {} where {} = {}").format(
-                    sql.Identifier(self.table),
-                    sql.Identifier(self.primarykey),
-                    sql.Placeholder()
-                )
-        elif type(columns) == list or type(columns) == tuple:
-            if primaryKey_value == None:
-                select_query = sql.SQL("SELECT {} FROM {}").format(
-                    sql.SQL(',').join(map(sql.Identifier, columns)),
-                    sql.Identifier(self.table)
-                )
-            else:
-                select_query = sql.SQL("SELECT {} FROM {} where {} = {}").format(
-                    sql.SQL(',').join(map(sql.Identifier, columns)),
-                    sql.Identifier(self.table),
-                    sql.Identifier(self.primarykey),
-                    sql.Placeholder()
-                )
-        try:
+        if primaryKey_value == None:
+            select_query = sql.SQL("SELECT {} FROM {}").format(
+                sql.SQL(',').join(map(sql.Identifier, columns)),
+                sql.Identifier(self.table)
+            )
+            self._execute( select_query )
+        else:
+            select_query = sql.SQL("SELECT {} FROM {} where {} = {}").format(
+                sql.SQL(',').join(map(sql.Identifier, columns)),
+                sql.Identifier(self.table),
+                sql.Identifier(self.primarykey),
+                sql.Placeholder()
+            )
             self._execute( select_query, ( primaryKey_value,))
+        try:
+            selected = self._cursor.fetchall()
+        except psycopg2.ProgrammingError as error:
+            selected = '# ERROR: ' + str(error)
+        print('-# selected >> '+ str(selected) )
+        self._close()
+        return selected
+
+
+    def select_all(self, primaryKey_value = None):
+        self._connect()
+        if primaryKey_value == None:
+            select_query = sql.SQL("SELECT * FROM {}").format(sql.Identifier(self.table))
+            self._execute( select_query )
+        else:
+            select_query = sql.SQL("SELECT * FROM {} where {} = {}").format(
+                sql.Identifier(self.table),
+                sql.Identifier(self.primarykey),
+                sql.Placeholder()
+            )
+            self._execute( select_query, ( primaryKey_value,))
+        try:
             selected = self._cursor.fetchall()
         except psycopg2.ProgrammingError as error:
             selected = '# ERROR: ' + str(error)
