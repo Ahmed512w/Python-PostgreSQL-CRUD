@@ -11,8 +11,7 @@ class Crud:
         self.dbname = dbname
         self.table = table
         self.primarykey = primarykey
-        self._connection = None
-        self._cursor = None
+        
 
 
     def _connect(self):
