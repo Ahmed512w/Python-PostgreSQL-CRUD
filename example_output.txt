@@ -1,0 +1,83 @@
+
+------------------------------------------------------------
+-# PostgreSQL connection & transaction is ACTIVE
+-# insert into "cities" ("city", "address") values (fayoum, south of cairo);
+-# PostgreSQL transaction is committed & connection is closed
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+-# PostgreSQL connection & transaction is ACTIVE
+-# insert into "cities" ("city", "address") values (matrooh, north);
+-# insert into "cities" ("city", "address") values (luxor, south);
+-# PostgreSQL transaction is committed & connection is closed
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+-# PostgreSQL connection & transaction is ACTIVE
+-# SELECT * FROM "cities";
+-# selected >> [('fayoum', 'south of cairo'), ('matrooh', 'north'), ('luxor', 'south')]
+-# PostgreSQL transaction is committed & connection is closed
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+-# PostgreSQL connection & transaction is ACTIVE
+-# SELECT * FROM "cities" where "city" = luxor;
+-# selected >> [('luxor', 'south')]
+-# PostgreSQL transaction is committed & connection is closed
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+-# PostgreSQL connection & transaction is ACTIVE
+-# SELECT "address" FROM "cities" where "city" = luxor;
+-# selected >> [('south',)]
+-# PostgreSQL transaction is committed & connection is closed
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+-# PostgreSQL connection & transaction is ACTIVE
+-# SELECT "address" FROM "cities";
+-# selected >> [('south of cairo',), ('north',), ('south',)]
+-# PostgreSQL transaction is committed & connection is closed
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+-# PostgreSQL connection & transaction is ACTIVE
+-# UPDATE "cities" SET "address" = 50 KM south of cairo WHERE "city" = fayoum;
+-# PostgreSQL transaction is committed & connection is closed
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+-# PostgreSQL connection & transaction is ACTIVE
+-# UPDATE "cities" SET ("city","address") = (qena, upperEgypt) WHERE "city" = luxor;
+-# PostgreSQL transaction is committed & connection is closed
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+-# PostgreSQL connection & transaction is ACTIVE
+-# DELETE FROM "cities" WHERE "city" = matrooh;
+-# PostgreSQL transaction is committed & connection is closed
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+-# PostgreSQL connection & transaction is ACTIVE
+-# SELECT * FROM "cities";
+-# selected >> [('fayoum', '50 KM south of cairo'), ('qena', 'upperEgypt')]
+-# PostgreSQL transaction is committed & connection is closed
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+-# PostgreSQL connection & transaction is ACTIVE
+-# DELETE FROM "cities";
+-# PostgreSQL transaction is committed & connection is closed
+------------------------------------------------------------
+
