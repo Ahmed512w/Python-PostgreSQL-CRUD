@@ -2,10 +2,10 @@
 Python PostgreSQL Insert, Select, Update and Delete table data to Perform CRUD Operations
 
 # How to use
- 1. Install Psycopg2 on your machine to use PostgreSQL from Python by ```pip install psycopg2```.
+1. Install Psycopg2 on your machine to use PostgreSQL from Python by ```pip install psycopg2```.
 
 
- 2. Create instance from Crud Class and pass ( user, password, host, port, dbname, table, primarykey ):
+2. Create instance from Crud Class and pass ( user, password, host, port, dbname, table, primarykey ):
 ````python
     # User – username you use to work with PostgreSQL, The default username for the PostgreSQL database is Postgres.
     # Password – Password is given by the user at the time of installing the PostgreSQL.
@@ -25,7 +25,13 @@ Python PostgreSQL Insert, Select, Update and Delete table data to Perform CRUD O
         primarykey = 'city'
     )
 ````
-  3- Crud class has a multiple methods used for crud operations
+3. connect to Database and start sql transaction by ```.connect()``` method.
+````python
+    table.connect()
+````
+
+
+4. Crud class has a multiple methods used for crud operations
    - insert()
    - insert_many()
    - select()
@@ -35,6 +41,24 @@ Python PostgreSQL Insert, Select, Update and Delete table data to Perform CRUD O
    - delete()
    - delete_all()
 
+
+5. To commit changes use ```.commit()``` method.
+````python
+     table.commit()
+````
+
+
+
+6. To end connection to Database use ```.close()``` method.
+   - this method has an optional argument "commit" used to commit new changes
+````python
+     # close connection without commit chamges
+     table.close()
+
+     # commit changes and close connection
+     table.close(True)
+     # or: table.close("commit")
+````
 
 
 _________________________________________________________________________________________________________________________
@@ -135,3 +159,4 @@ ________________________________________________________________________________
 ````python
     table.delete_all()
 ````
+

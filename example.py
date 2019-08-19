@@ -10,7 +10,10 @@ table = Crud(
     dbname = 'postgres',
     table = 'cities',
     primarykey = 'city'
-    )
+)
+
+
+table.connect()
 
 
 table.insert(
@@ -26,6 +29,9 @@ table.insert_many(
         ['luxor', 'south']
     ]
 )
+
+
+table.commit()
 
 
 table.select_all()
@@ -70,3 +76,7 @@ table.select_all()
 
 
 table.delete_all()
+
+
+table.close('commit')
+
