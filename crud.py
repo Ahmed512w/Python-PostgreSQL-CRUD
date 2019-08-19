@@ -70,7 +70,10 @@ class Crud:
             self._cursor.close()
             self._connection.close()
         if self._counter > 0:
-            print('-# '+ str(self._counter) +' changes NOT commited\n')
+            print(
+                '-# '+ str(self._counter) +' changes NOT commited  CLOSE connection\n'
+                '------------------------------------------------------------\n'
+            )
         else:
             print(
                 '-# CLOSE connection\n'

@@ -78,5 +78,5 @@ table.select_all()
 table.delete_all()
 
 
-table.close('commit')
+table.close("commit")
 
